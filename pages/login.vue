@@ -3,8 +3,6 @@
     <v-col cols="12" sm="10" md="8">
       <h1 class="mt-4 mb-5">Log in</h1>
 
-      <v-alert v-if="apiError" class="mt-3" type="error">{{ apiError }}</v-alert>
-
       <v-form v-model="valid" @submit.prevent="logIn">
         <v-text-field
           v-model="email"
@@ -25,6 +23,8 @@
 
         <v-btn :loading="busy" type="submit">Log in</v-btn>
       </v-form>
+
+      <v-alert v-if="apiError" class="mt-6" type="error">{{ apiError }}</v-alert>
     </v-col>
   </v-row>
 </template>
