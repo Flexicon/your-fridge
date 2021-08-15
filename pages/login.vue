@@ -21,7 +21,7 @@
           autocomplete="current-password"
         ></v-text-field>
 
-        <v-btn :loading="busy" type="submit">Log in</v-btn>
+        <v-btn :loading="busy" type="submit" color="primary">Log in</v-btn>
       </v-form>
 
       <v-alert v-if="apiError" class="mt-6" type="error">{{ apiError }}</v-alert>
