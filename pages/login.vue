@@ -44,13 +44,13 @@ export default Vue.extend({
       apiError: null,
       busy: false,
 
-      email: 'user1@example.com',
+      email: '',
       emailRules: [
         (v: string) => !!v || 'E-mail is required',
         (v: string) => /.+@.+/.test(v) || 'E-mail must be valid',
       ],
 
-      password: 'testing1',
+      password: '',
       passwordRules: [(v: string) => !!v || 'Name is required'],
     }
   },
