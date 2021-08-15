@@ -64,6 +64,7 @@ export default {
             },
             emulatorPort: process.env.NODE_ENV === 'development' ? 9099 : undefined,
           },
+          database: true,
         },
       },
     ],
