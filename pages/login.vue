@@ -3,7 +3,7 @@
     <v-col cols="12" sm="10" md="8">
       <h1 class="mt-4 mb-5">Log in</h1>
 
-      <v-form v-model="valid" @submit.prevent="logInWithEmail">
+      <v-form ref="form" v-model="valid" @submit.prevent="logInWithEmail">
         <v-text-field
           v-model="email"
           :disabled="busy"
@@ -14,6 +14,7 @@
 
         <v-text-field
           v-model="password"
+          class="mb-5"
           :disabled="busy"
           type="password"
           :rules="passwordRules"
@@ -21,7 +22,7 @@
           autocomplete="current-password"
         ></v-text-field>
 
-        <v-btn :loading="busy" type="submit" color="primary">Log in</v-btn>
+        <v-btn class="mr-1" :loading="busy" type="submit" color="primary">Log in</v-btn>
         <v-btn :loading="busy" color="white" @click="logInWithGoogle">
           <img class="google-logo" src="~/assets/images/google-logo.svg" alt="Sign in with Google logo" />
           Sign in with Google
@@ -36,6 +37,10 @@
 <script lang="ts">
 import Vue from 'vue'
 import firebase from 'firebase/app'
+
+interface Refs {
+  form?: Vue & { validate: () => boolean }
+}
 
 export default Vue.extend({
   data() {
@@ -59,9 +64,19 @@ export default Vue.extend({
     title: 'Log in',
   },
 
+  computed: {
+    form() {
+      return (this.$refs as Refs).form
+    },
+  },
+
   methods: {
     logInWithEmail() {
-      this.handleLogIn(() => this.$fire.auth.signInWithEmailAndPassword(this.email, this.password))
+      this.form?.validate()
+
+      if (this.valid) {
+        this.handleLogIn(() => this.$fire.auth.signInWithEmailAndPassword(this.email, this.password))
+      }
     },
 
     logInWithGoogle() {
