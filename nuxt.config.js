@@ -22,7 +22,7 @@ export default {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: ['~/plugins/auth.client.ts'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -35,6 +35,8 @@ export default {
     '@nuxtjs/stylelint-module',
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
+    // https://typed-vuex.roe.dev/getting-started/getting-started-nuxt
+    'nuxt-typed-vuex',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -56,7 +58,12 @@ export default {
           measurementId: 'G-VVXK8CRJJS',
         },
         services: {
-          auth: true,
+          auth: {
+            initialize: {
+              onAuthStateChangedAction: 'auth/onAuthStateChanged',
+            },
+            emulatorPort: process.env.NODE_ENV === 'development' ? 9099 : undefined
+          },
         },
       },
     ],

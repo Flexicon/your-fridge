@@ -2,14 +2,10 @@
   <v-app dark>
     <v-navigation-drawer v-model="drawer" clipped fixed app>
       <v-list>
-        <v-list-item v-for="(item, i) in items" :key="i" :to="item.to" router exact>
-          <v-list-item-action>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title v-text="item.title" />
-          </v-list-item-content>
-        </v-list-item>
+        <nav-list-item icon="mdi-home" title="Home" to="/"></nav-list-item>
+        <nav-list-item v-if="isLoggedIn" icon="mdi-account" title="Profile" to="/profile"></nav-list-item>
+        <nav-list-item v-if="!isLoggedIn" icon="mdi-login" title="Log in" to="/login"></nav-list-item>
+        <nav-list-item v-if="isLoggedIn" icon="mdi-logout" title="Log out" @click="logOut"></nav-list-item>
       </v-list>
     </v-navigation-drawer>
 
@@ -33,21 +29,28 @@
   </v-app>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue from 'vue'
+
+export default Vue.extend({
   data() {
     return {
       drawer: false,
-      items: [
-        {
-          icon: 'mdi-home',
-          title: 'Home',
-          to: '/',
-        },
-      ],
       title: 'Your Fridge',
       titleIcon: 'mdi-fridge-outline',
     }
   },
-}
+
+  computed: {
+    isLoggedIn() {
+      return this.$accessor.auth.isLoggedIn
+    },
+  },
+
+  methods: {
+    async logOut() {
+      await this.$fire.auth.signOut()
+    },
+  },
+})
 </script>

@@ -1,7 +1,7 @@
 <template>
   <v-row justify="center" align="center">
     <v-col>
-      <h1 class="mt-4">What's in <em>your</em> fridge?</h1>
+      <h1 class="mt-4">Hi, {{ userDisplayName }}</h1>
     </v-col>
   </v-row>
 </template>
@@ -11,7 +11,13 @@ import Vue from 'vue'
 
 export default Vue.extend({
   head: {
-    title: 'Home',
+    title: 'Profile',
+  },
+
+  computed: {
+    userDisplayName() {
+      return this.$accessor.auth.userName
+    },
   },
 })
 </script>
