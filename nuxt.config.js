@@ -22,7 +22,7 @@ export default {
   css: ['~/assets/main.scss'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: [{ src: '~/plugins/vuetify-confirm', mode: 'client' }],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -62,7 +62,7 @@ export default {
             initialize: {
               onAuthStateChangedAction: 'auth/onAuthStateChanged',
             },
-            emulatorPort: process.env.NODE_ENV === 'development' ? 9099 : undefined
+            emulatorPort: process.env.NODE_ENV === 'development' ? 9099 : undefined,
           },
         },
       },
@@ -85,6 +85,6 @@ export default {
   build: {},
 
   router: {
-    middleware: 'routeAuth'
-  }
+    middleware: 'routeAuth',
+  },
 }

@@ -23,7 +23,8 @@
     "firebase": "^8.9.1",
     "nuxt": "^2.15.7",
     "nuxt-typed-vuex": "^0.2.0",
-    "vuetify": "^2.5.5"
+    "vuetify": "^2.5.5",
+    "vuetify-confirm": "^2.0.6"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.14.7",
