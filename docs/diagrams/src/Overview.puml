@@ -1,0 +1,36 @@
+@startuml Overview
+object Fridge {
+    id: string
+    name: string
+    owner: string // user id
+    shared_with: string[] // array of user ids
+    products: string[] // array of product ids
+}
+
+object User {
+    uid: string
+}
+note right of User : owner or shared
+
+object Product {
+    id: string
+    name: string
+    owner: string // user id
+}
+
+object Recipe {
+  id: string
+  name: string
+  owner: string // user id
+  shared_with: string[] // array of user ids
+  products: string[] // array of product ids
+}
+
+User "1" --> "*" Fridge
+User "*" -- "*" Fridge
+Product "*" -- "*" Fridge
+Product "*" -- "*" Recipe
+User "1" --> "*" Product
+User "1" --> "*" Recipe
+User "*" -- "*" Recipe
+@enduml
